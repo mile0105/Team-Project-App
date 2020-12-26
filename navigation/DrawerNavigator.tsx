@@ -1,11 +1,20 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import * as React from 'react';
 
-import DatabaseScreen from '../screens/DatabaseScreen';
-import FileSystemScreen from '../screens/FileSystemScreen';
-import ClientsScreen from '../screens/ClientsScreen';
-import { DrawerParamList, DatabaseParamList, FileSystemParamList, ClientsParamList } from '../types';
+import AchievementsScreen from '../screens/AchievementsScreen';
+import ChallengesScreen from '../screens/ChallengesScreen';
+import EventsScreen from '../screens/EventsScreen';
+import {
+  DrawerParamList,
+  AchievementsParamList,
+  ChallengesParamList,
+  EventsParamList,
+  RequirementsParamList, ShopParamList, AccountStatsParamList
+} from '../types';
+import ShopScreen from "../screens/ShopScreen";
+import RequirementsScreen from "../screens/RequirementsScreen";
+import AccountStatsScreen from "../screens/AccountStatsScreen";
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
@@ -13,55 +22,107 @@ export default function DrawerNavigator() {
   return (
     <Drawer.Navigator>
       <Drawer.Screen
-        name="Database"
+        name="Achievements"
         component={DatabaseNavigator}/>
       <Drawer.Screen
-        name="FileSystem"
-        component={FileSystemNavigator}
+        name="Challenges"
+        component={ChallengesNavigator}
       />
       <Drawer.Screen
-        name="Clients"
-        component={ClientsNavigator}
+        name="Events"
+        component={EventsNavigator}
       />
+      <Drawer.Screen
+        name="Stats"
+        component={AccountStatsNavigator}
+      />
+      <Drawer.Screen
+        name="Shop"
+        component={ShopNavigator}
+      />
+      <Drawer.Screen
+        name="Requirements"
+        component={RequirementsNavigator}
+      />
+
     </Drawer.Navigator>
   );
 }
 
-const DatabaseStack = createStackNavigator<DatabaseParamList>();
+const AchievementsStack = createStackNavigator<AchievementsParamList>();
 
 function DatabaseNavigator() {
   return (
-    <DatabaseStack.Navigator>
-      <DatabaseStack.Screen
-        name="DatabaseScreen"
-        component={DatabaseScreen}
+    <AchievementsStack.Navigator>
+      <AchievementsStack.Screen
+        name="Achievements"
+        component={AchievementsScreen}
       />
-    </DatabaseStack.Navigator>
+    </AchievementsStack.Navigator>
   )
 }
 
-const FileSystemStack = createStackNavigator<FileSystemParamList>();
+const ChallengesStack = createStackNavigator<ChallengesParamList>();
 
-function FileSystemNavigator() {
+function ChallengesNavigator() {
   return (
-    <FileSystemStack.Navigator>
-      <FileSystemStack.Screen
-        name="FileSystemScreen"
-        component={FileSystemScreen}
+    <ChallengesStack.Navigator>
+      <ChallengesStack.Screen
+        name="Challenges"
+        component={ChallengesScreen}
       />
-    </FileSystemStack.Navigator>
+    </ChallengesStack.Navigator>
   )
 }
 
-const ClientsStack = createStackNavigator<ClientsParamList>();
+const EventsStack = createStackNavigator<EventsParamList>();
 
-function ClientsNavigator() {
+function EventsNavigator() {
   return (
-    <ClientsStack.Navigator>
-      <ClientsStack.Screen
-        name="ClientsScreen"
-        component={ClientsScreen}
+    <EventsStack.Navigator>
+      <EventsStack.Screen
+        name="Events"
+        component={EventsScreen}
       />
-    </ClientsStack.Navigator>
+    </EventsStack.Navigator>
+  )
+}
+
+const AccountStatsStack = createStackNavigator<AccountStatsParamList>();
+
+function AccountStatsNavigator() {
+  return (
+    <AccountStatsStack.Navigator>
+      <AccountStatsStack.Screen
+        name="Stats"
+        component={AccountStatsScreen}
+      />
+    </AccountStatsStack.Navigator>
+  )
+}
+
+const ShopStack = createStackNavigator<ShopParamList>();
+
+function ShopNavigator() {
+  return (
+    <ShopStack.Navigator>
+      <ShopStack.Screen
+        name="Shop"
+        component={ShopScreen}
+      />
+    </ShopStack.Navigator>
+  )
+}
+
+const RequirementsStack = createStackNavigator<RequirementsParamList>();
+
+function RequirementsNavigator() {
+  return (
+    <RequirementsStack.Navigator>
+      <RequirementsStack.Screen
+        name="Requirements"
+        component={RequirementsScreen}
+      />
+    </RequirementsStack.Navigator>
   )
 }

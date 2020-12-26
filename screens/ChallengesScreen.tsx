@@ -7,9 +7,9 @@ import MenuIcon from '../components/MenuIcon';
 import { useEffect } from 'react';
 import main from '../styles/main';
 
-export default function FileSystemScreen() {
+export default function ChallengesScreen() {
   const navigation = useNavigation();
-  
+
   useEffect(() => {
     navigation.setOptions({
       headerLeft: (props: StackHeaderLeftButtonProps) => (<MenuIcon/>)
@@ -22,7 +22,7 @@ export default function FileSystemScreen() {
         lightColor="rgba(0,0,0,0.8)"
         darkColor="rgba(255,255,255,0.8)"
       >
-        This is FileSystem Screen
+        This is Challenges Screen
       </Text>
     </View>
   )

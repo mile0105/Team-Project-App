@@ -7,11 +7,12 @@ import MenuIcon from '../components/MenuIcon';
 import { useEffect } from 'react';
 import main from '../styles/main';
 
-export default function ClientsScreen() {
+export default function AchievementsScreen() {
   const navigation = useNavigation();
 
   useEffect(() => {
     navigation.setOptions({
+      showHeader: true,
       headerLeft: (props: StackHeaderLeftButtonProps) => (<MenuIcon/>)
     });
   });
@@ -22,7 +23,7 @@ export default function ClientsScreen() {
         lightColor="rgba(0,0,0,0.8)"
         darkColor="rgba(255,255,255,0.8)"
       >
-        This is Clients Screen
+        This is Achievements Screen
       </Text>
     </View>
   )
