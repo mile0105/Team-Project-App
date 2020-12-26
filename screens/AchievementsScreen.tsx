@@ -6,6 +6,7 @@ import { Text, View } from '../components/Themed';
 import MenuIcon from '../components/MenuIcon';
 import { useEffect } from 'react';
 import main from '../styles/main';
+import {fetchAchievements} from "../api/apis";
 
 export default function AchievementsScreen() {
   const navigation = useNavigation();
@@ -15,6 +16,13 @@ export default function AchievementsScreen() {
       showHeader: true,
       headerLeft: (props: StackHeaderLeftButtonProps) => (<MenuIcon/>)
     });
+
+    fetchAchievements().then(data => {
+      console.log(data);
+    }).catch(err => {
+      console.log('Error occurred');
+      console.log(err);
+    })
   });
 
   return (

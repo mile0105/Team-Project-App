@@ -6,6 +6,7 @@ import { Text, View } from '../components/Themed';
 import MenuIcon from '../components/MenuIcon';
 import { useEffect } from 'react';
 import main from '../styles/main';
+import {fetchSeasonalChallenges} from "../api/apis";
 
 export default function ChallengesScreen() {
   const navigation = useNavigation();
@@ -14,6 +15,14 @@ export default function ChallengesScreen() {
     navigation.setOptions({
       headerLeft: (props: StackHeaderLeftButtonProps) => (<MenuIcon/>)
     });
+
+    fetchSeasonalChallenges().then(data => {
+      console.log(data);
+    }).catch(err => {
+      console.log('Error occurred');
+      console.log(err);
+    })
+
   });
 
   return (
