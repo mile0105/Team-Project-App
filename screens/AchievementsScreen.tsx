@@ -1,15 +1,21 @@
 import * as React from 'react';
+import {useEffect} from 'react';
+import {fetchAchievements} from "../api/apis";
+
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderLeftButtonProps } from '@react-navigation/stack';
 
-import { Text, View } from '../components/Themed';
 import MenuIcon from '../components/MenuIcon';
-import { useEffect } from 'react';
-import main from '../styles/main';
-import {fetchAchievements} from "../api/apis";
+import {useState} from 'react';
+import {Achievement} from "../api/models/achievements";
+import {ScrollView} from "react-native-gesture-handler";
+import AchievementComponent from "../components/AchievementComponent";
 
 export default function AchievementsScreen() {
+
   const navigation = useNavigation();
+
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -18,21 +24,20 @@ export default function AchievementsScreen() {
     });
 
     fetchAchievements().then(data => {
-      console.log(data);
+      setAchievements(data.achievements);
     }).catch(err => {
-      console.log('Error occurred');
-      console.log(err);
+      alert('Error occured');
     })
-  });
+  }, []);
 
   return (
-    <View style={main.centered}>
-      <Text
-        lightColor="rgba(0,0,0,0.8)"
-        darkColor="rgba(255,255,255,0.8)"
-      >
-        This is Achievements Screen
-      </Text>
-    </View>
+
+    <ScrollView>
+      {achievements.map((achievement, index) =>
+        <AchievementComponent achievement={achievement} key={index}/>
+      )}
+    </ScrollView>
+
+
   )
 };

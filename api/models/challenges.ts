@@ -29,7 +29,7 @@ export interface Week {
   challenges: Challenge[]
 }
 
-export interface NonWeeklyChallenges {
+export interface NonWeeklyChallenge {
   name: string,
   tags: string[],
   color: string,
@@ -37,7 +37,7 @@ export interface NonWeeklyChallenges {
 }
 
 export interface ChallengesResponse {
-  weeks: Week[],
+  weeks: any,
   seasonWeeks: string[],
-  other: NonWeeklyChallenges[]
+  other: NonWeeklyChallenge[]
 }

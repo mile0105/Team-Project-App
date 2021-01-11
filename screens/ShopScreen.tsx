@@ -4,12 +4,16 @@ import {StackHeaderLeftButtonProps} from '@react-navigation/stack';
 
 import {Text, View} from '../components/Themed';
 import MenuIcon from '../components/MenuIcon';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import main from '../styles/main';
 import {fetchShop} from "../api/apis";
+import {Item} from "../api/models/shop";
+import ItemComponent from "../components/ItemComponent";
 
 export default function ShopScreen() {
   const navigation = useNavigation();
+
+  const [items, setItems] = useState<Item[]>([]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -17,20 +21,16 @@ export default function ShopScreen() {
     });
 
     fetchShop().then(data => {
-      console.log(data);
+      setItems(data.daily)
     }).catch(err => {
+
       console.log(err);
     })
-  });
+  },[]);
 
   return (
     <View style={main.centered}>
-      <Text
-        lightColor="rgba(0,0,0,0.8)"
-        darkColor="rgba(255,255,255,0.8)"
-      >
-        This is Shop Screen
-      </Text>
+      {items.map((item, index) => <ItemComponent item={item} key={index}/>)}
     </View>
   )
 };

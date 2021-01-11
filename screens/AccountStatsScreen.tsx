@@ -25,7 +25,7 @@ export default function AccountStatsScreen() {
       console.log(err);
     })
 
-  });
+  }, []);
 
   return (
     <View style={main.centered}>
