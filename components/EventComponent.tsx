@@ -13,8 +13,8 @@ export default function EventComponent({event}: EventComponentProps) {
     const beginTime = new Date(event.beginTime);
     const endTime = new Date(event.endTime);
 
-    return `${beginTime.toLocaleDateString()} - ${endTime.toLocaleDateString()}`
-
+    const scheduleScreen = `${beginTime.toLocaleDateString()} - ${endTime.toLocaleDateString()}`;
+    return event.schedule != '' ? event.schedule : scheduleScreen;
   };
 
   return (
@@ -35,7 +35,7 @@ export default function EventComponent({event}: EventComponentProps) {
         {event.long_description}
       </Text>
 
-      <Card.Image source={{ uri: event.poster}}/>
+      <Card.Image source={{ uri: event.poster}} resizeMode={'contain'} style={{ marginTop: 10, width: '100%', height: undefined, aspectRatio: 1}}/>
     </Card>
   )
 
