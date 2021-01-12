@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { ListItem } from 'react-native-elements';
+import {Avatar, ListItem} from 'react-native-elements';
 
 import {Achievement} from "../api/models/achievements";
 import {Text} from "./Themed";
+import {View} from "react-native";
 
 
 export interface AchievementComponentProps {
@@ -13,11 +14,16 @@ export default function AchievementComponent({achievement}: AchievementComponent
 
   return(
 
-    <>
-      <Text>
-        {achievement.name}
-      </Text>
-    </>
+    <View>
+      <ListItem bottomDivider topDivider>
+        <Avatar source={{uri: achievement.image}}/>
+        <ListItem.Content>
+          <ListItem.Title>{achievement.name}</ListItem.Title>
+          <ListItem.Subtitle>{achievement.description}</ListItem.Subtitle>
+        </ListItem.Content>
+
+      </ListItem>
+    </View>
   )
 
 }

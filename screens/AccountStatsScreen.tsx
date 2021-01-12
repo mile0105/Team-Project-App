@@ -4,37 +4,58 @@ import {StackHeaderLeftButtonProps} from '@react-navigation/stack';
 
 import {Text, View} from '../components/Themed';
 import MenuIcon from '../components/MenuIcon';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import main from '../styles/main';
 import {fetchAccountStatistics} from "../api/apis";
+import {AccountResponseData} from "../api/models/accounts";
+import {Button, Input} from 'react-native-elements';
+import {ScrollView} from "react-native";
+import AccountComponent from "../components/AccountComponent";
 
 export default function AccountStatsScreen() {
   const navigation = useNavigation();
 
+  const [accountName, setAccountName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [account, setAccount] = useState<AccountResponseData| undefined>(undefined);
+
   useEffect(() => {
+
     navigation.setOptions({
       showHeader: true,
       headerLeft: (props: StackHeaderLeftButtonProps) => (<MenuIcon/>)
     });
-
-    fetchAccountStatistics('Grunec1').then(data => {
-        console.log(data);
-    }
-    ).catch(err => {
-      console.log('Error occurred');
-      console.log(err);
-    })
+    setErrorMessage('');
 
   }, []);
 
+  const searchAccount = () => {
+
+    fetchAccountStatistics(accountName).then(data => {
+      setAccount(data.data);
+    }).catch(err => {
+      console.log(err);
+      setErrorMessage('Could not fetch account');
+      setAccount(undefined);
+    })
+  };
+
   return (
-    <View style={main.centered}>
-      <Text
-        lightColor="rgba(0,0,0,0.8)"
-        darkColor="rgba(255,255,255,0.8)"
-      >
-        This is Stats Screen
-      </Text>
+    <View style={main.centerHorizontally}>
+      <ScrollView style={{marginTop: 10, width: '90%'}}>
+        <Input
+          placeholder='Account name: '
+          label={'Enter account name to get the stats'}
+          errorStyle={{ color: 'red' }}
+          errorMessage={errorMessage}
+          onChangeText={value => setAccountName(value)}
+        />
+        <Button title={'Search'} onPress={searchAccount}/>
+
+        {account && (
+          <AccountComponent data={account}/>
+        )}
+      </ScrollView>
     </View>
   )
 };
