@@ -31,8 +31,9 @@ export default function ChallengesScreen() {
       }
 
       setWeeks(weeks);
-      setOtherChallenges(data.other.slice(0, 5))
+      setOtherChallenges(data.other);
     }).catch(err => {
+      alert('Could not fetch challenges');
       console.log('Error occurred');
       console.log(err);
     })
@@ -41,7 +42,6 @@ export default function ChallengesScreen() {
 
   return (
     <ScrollView>
-
       <>
         {weeks.map((week, index) => <WeekComponent week={week} key={index}/>)}
       </>

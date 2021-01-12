@@ -26,4 +26,7 @@ export default StyleSheet.create({
     left: 10,
     flexShrink: 1
   },
+  boldText: {
+    fontWeight: 'bold'
+  }
 });

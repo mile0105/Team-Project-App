@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { StackHeaderLeftButtonProps } from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
+import {StackHeaderLeftButtonProps} from '@react-navigation/stack';
 
-import { View } from '../components/Themed';
 import MenuIcon from '../components/MenuIcon';
-import { useEffect, useState } from 'react';
-import main from '../styles/main';
+import {useEffect, useState} from 'react';
 import {fetchEvents} from "../api/apis";
 import {Event} from '../api/models/events';
 import EventComponent from "../components/EventComponent";
+import {ScrollView} from "react-native";
 
 export default function EventsScreen() {
   const navigation = useNavigation();
@@ -21,8 +20,19 @@ export default function EventsScreen() {
     });
 
     fetchEvents().then(data => {
-      const events = data.events.filter(ev => new Date(ev.beginTime) > new Date('2020-12-20'));
-      setCurrentEvents(events);
+      const now = new Date();
+      const currEvents = data.events.filter(ev => new Date(ev.beginTime) < now && new Date(ev.endTime) > now);
+
+      const distinctEvents: Event[] = [];
+
+      for (let ev of currEvents) {
+        if (!distinctEvents.some(existingEvent => existingEvent.name_line1 === ev.name_line1
+                                                      && existingEvent.name_line2 === existingEvent.name_line2)) {
+          distinctEvents.push(ev)
+        }
+      }
+
+      setCurrentEvents(distinctEvents);
     }).catch(err => {
       console.log('Error occurred');
       console.log(err);
@@ -30,8 +40,9 @@ export default function EventsScreen() {
   }, []);
 
   return (
-    <View style={main.centered}>
+    <ScrollView style={{marginTop: 10, marginBottom: 10}}>
       {currentEvents.map((event, index) => <EventComponent event={event} key={index}/>)}
-    </View>
+    </ScrollView>
+
   )
 };

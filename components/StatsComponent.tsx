@@ -1,8 +1,9 @@
 import * as React from "react";
 import {AllStats} from "../api/models/accounts";
-import {ListItem} from "react-native-elements";
 import StatisticsComponent from "./StatisticsComponent";
-import {View} from "react-native";
+import {View, Text} from "react-native";
+import {Col, Grid, Row} from "react-native-easy-grid";
+import main from "../styles/main";
 
 export interface StatsComponentProps {
   stats: AllStats
@@ -15,63 +16,55 @@ export default function StatsComponent({stats: {all}}: StatsComponentProps) {
 
   return (
     <View>
-      {solo && (
-        <ListItem bottomDivider>
-          <ListItem.Content>
-            <ListItem.Title>Solo</ListItem.Title>
-          </ListItem.Content>
-          <StatisticsComponent statistics={solo}/>
-        </ListItem>
-      )}
+      <Grid style={{marginTop: 15}}>
+        <Row>
+          <Col>
+            <Text style={main.boldText}>
+              Type
+            </Text>
+          </Col>
+          <Col>
+            <Text style={main.boldText}>
+              Kills
+            </Text>
+          </Col>
+          <Col>
+            <Text style={main.boldText}>
+              Deaths
+            </Text>
+          </Col>
+          <Col>
+            <Text style={main.boldText}>
+              Matches played
+            </Text>
+          </Col>
+        </Row>
 
+        {solo && (
+          <StatisticsComponent statistics={solo} type={'Solo'}/>
+        )}
 
-      {duo && (
-        <ListItem bottomDivider>
-          <ListItem.Content>
-            <ListItem.Title>Duo</ListItem.Title>
-          </ListItem.Content>
-          <StatisticsComponent statistics={duo}/>
-        </ListItem>
-      )}
+        {duo && (
+          <StatisticsComponent statistics={duo} type={'Duo'}/>
+        )}
 
+        {trio && (
+          <StatisticsComponent statistics={trio} type={'Trio'}/>
+        )}
 
-      {trio && (
-        <ListItem bottomDivider>
-          <ListItem.Content>
-            <ListItem.Title>Trio</ListItem.Title>
-          </ListItem.Content>
-          <StatisticsComponent statistics={trio}/>
-        </ListItem>
-      )}
+        {squad && (
+          <StatisticsComponent statistics={squad} type={'Squad'}/>
+        )}
 
+        {ltm && (
+          <StatisticsComponent statistics={ltm} type={'LTM'}/>
+        )}
 
-      {squad && (
-        <ListItem bottomDivider>
-          <ListItem.Content>
-            <ListItem.Title>Squad</ListItem.Title>
-          </ListItem.Content>
-          <StatisticsComponent statistics={squad}/>
-        </ListItem>
-      )}
+        {overall && (
+          <StatisticsComponent statistics={overall} type={'Overall'}/>
+        )}
 
-
-      {ltm && (
-        <ListItem bottomDivider>
-          <ListItem.Content>
-            <ListItem.Title>LTM</ListItem.Title>
-          </ListItem.Content>
-          <StatisticsComponent statistics={ltm}/>
-        </ListItem>
-      )}
-
-      {overall && (
-        <ListItem bottomDivider>
-          <ListItem.Content>
-            <ListItem.Title>Overall</ListItem.Title>
-          </ListItem.Content>
-          <StatisticsComponent statistics={overall}/>
-        </ListItem>
-      )}
+      </Grid>
 
     </View>
   )

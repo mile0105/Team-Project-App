@@ -1,7 +1,7 @@
-import {Text} from "./Themed";
 import * as React from "react";
-import {NonWeeklyChallenge, Week} from "../api/models/challenges";
+import {NonWeeklyChallenge} from "../api/models/challenges";
 import ChallengeComponent from "./ChallengeComponent";
+import {Card} from "react-native-elements";
 
 export interface NonWeeklyChallengeComponentProps {
   nonWeeklyChallenge: NonWeeklyChallenge
@@ -11,10 +11,11 @@ export default function NonWeeklyChallengeComponent({nonWeeklyChallenge}: NonWee
 
   return (
     <>
-      <Text>
-        {nonWeeklyChallenge.name}
-      </Text>
-      {nonWeeklyChallenge.challenges.map((challenge, index) => <ChallengeComponent challenge={challenge} key={index}/>)}
+      <Card>
+        <Card.Title>{nonWeeklyChallenge.name}</Card.Title>
+        <Card.Divider/>
+        {nonWeeklyChallenge.challenges.map((challenge, index) => <ChallengeComponent challenge={challenge} key={index}/>)}
+      </Card>
     </>
   )
 }
