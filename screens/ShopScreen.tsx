@@ -2,18 +2,18 @@ import * as React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StackHeaderLeftButtonProps} from '@react-navigation/stack';
 
-import {Text, View} from '../components/Themed';
 import MenuIcon from '../components/MenuIcon';
 import {useEffect, useState} from 'react';
-import main from '../styles/main';
 import {fetchShop} from "../api/apis";
-import {Item} from "../api/models/shop";
-import ItemComponent from "../components/ItemComponent";
+import {Item, ShopResponse} from "../api/models/shop";
+import ItemListComponent from "../components/ItemListComponent";
+import {ScrollView} from "react-native";
 
 export default function ShopScreen() {
   const navigation = useNavigation();
 
-  const [items, setItems] = useState<Item[]>([]);
+
+  const [shop, setShop] = useState<ShopResponse>();
 
   useEffect(() => {
     navigation.setOptions({
@@ -21,7 +21,7 @@ export default function ShopScreen() {
     });
 
     fetchShop().then(data => {
-      setItems(data.daily)
+      setShop(data)
     }).catch(err => {
 
       console.log(err);
@@ -29,8 +29,15 @@ export default function ShopScreen() {
   },[]);
 
   return (
-    <View style={main.centered}>
-      {items.map((item, index) => <ItemComponent item={item} key={index}/>)}
-    </View>
+    <ScrollView>
+
+        <ItemListComponent items={shop?.daily!!} name={'Daily'}/>
+        <ItemListComponent items={shop?.community!!} name={'Community'}/>
+        <ItemListComponent items={shop?.featured!!} name={'Featured'}/>
+        <ItemListComponent items={shop?.specialDaily!!} name={'Special daily'}/>
+        <ItemListComponent items={shop?.specialFeatured!!} name={'Special featured'}/>
+        <ItemListComponent items={shop?.offers!!} name={'Offers'}/>
+
+    </ScrollView>
   )
 };

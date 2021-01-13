@@ -17,7 +17,9 @@ export default function ChallengeComponent({challenge}: ChallengeComponentProps)
 
   return (
     <>
-      <ListItem bottomDivider style={{backgroundColor: color}}>
+      <ListItem bottomDivider style={{backgroundColor: color}} onPress={() => {
+        setModalVisible(true);
+      }}>
         <ListItem.Content style={{width: "85%"}}>
           <ListItem.Title style={{width: "85%"}}>{challenge.title}</ListItem.Title>
           <ListItem.Subtitle>{`Experience: ${challenge.xp}`}</ListItem.Subtitle>
