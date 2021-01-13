@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   centered: {
@@ -28,5 +28,11 @@ export default StyleSheet.create({
   },
   boldText: {
     fontWeight: 'bold'
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    padding: 10
   }
 });

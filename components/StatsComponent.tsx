@@ -1,7 +1,7 @@
 import * as React from "react";
 import {AllStats} from "../api/models/accounts";
 import StatisticsComponent from "./StatisticsComponent";
-import {View, Text} from "react-native";
+import {Text, View} from "react-native";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import main from "../styles/main";
 

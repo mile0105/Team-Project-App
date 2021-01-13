@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Text as DefaultText, View as DefaultView } from 'react-native';
-import { Feather as DefaultFeather } from '@expo/vector-icons';
+import {Text as DefaultText, View as DefaultView} from 'react-native';
+import {Feather as DefaultFeather} from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';

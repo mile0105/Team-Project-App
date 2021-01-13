@@ -1,6 +1,6 @@
 import {Text} from "./Themed";
 import * as React from "react";
-import {AllStats, Statistics} from "../api/models/accounts";
+import {Statistics} from "../api/models/accounts";
 import {View} from "react-native";
 import {Col, Row} from "react-native-easy-grid";
 import main from "../styles/main";

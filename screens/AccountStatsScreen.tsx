@@ -1,10 +1,10 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StackHeaderLeftButtonProps} from '@react-navigation/stack';
 
 import {View} from '../components/Themed';
 import MenuIcon from '../components/MenuIcon';
-import {useEffect, useState} from 'react';
 import main from '../styles/main';
 import {fetchAccountStatistics} from "../api/apis";
 import {AccountResponseData} from "../api/models/accounts";
@@ -15,9 +15,10 @@ import AccountComponent from "../components/AccountComponent";
 export default function AccountStatsScreen() {
   const navigation = useNavigation();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [accountName, setAccountName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [account, setAccount] = useState<AccountResponseData| undefined>(undefined);
+  const [account, setAccount] = useState<AccountResponseData | undefined>(undefined);
 
   useEffect(() => {
 
@@ -31,13 +32,21 @@ export default function AccountStatsScreen() {
 
   const searchAccount = () => {
 
-    fetchAccountStatistics(accountName).then(data => {
-      setAccount(data.data);
-    }).catch(err => {
-      console.log(err);
-      setErrorMessage('Could not fetch account');
-      setAccount(undefined);
-    })
+    if (!isLoading) {
+      setIsLoading(true);
+      fetchAccountStatistics(accountName).then(data => {
+        setAccount(data.data);
+        setIsLoading(false);
+      }).catch(err => {
+        if (err.status && err.status === 404) {
+          setErrorMessage('Account does not exist');
+        } else {
+          setErrorMessage('Could not fetch account')
+        }
+        setAccount(undefined);
+        setIsLoading(false)
+      });
+    }
   };
 
   return (
@@ -46,11 +55,11 @@ export default function AccountStatsScreen() {
         <Input
           placeholder='Account name: '
           label={'Enter account name to get the stats'}
-          errorStyle={{ color: 'red' }}
+          errorStyle={{color: 'red'}}
           errorMessage={errorMessage}
           onChangeText={value => setAccountName(value)}
         />
-        <Button title={'Search'} onPress={searchAccount}/>
+        <Button title={'Search'} disabled={isLoading} onPress={searchAccount}/>
 
         {account && (
           <AccountComponent data={account}/>

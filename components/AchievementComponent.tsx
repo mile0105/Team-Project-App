@@ -2,7 +2,6 @@ import * as React from 'react';
 import {Avatar, ListItem} from 'react-native-elements';
 
 import {Achievement} from "../api/models/achievements";
-import {Text} from "./Themed";
 import {View} from "react-native";
 
 

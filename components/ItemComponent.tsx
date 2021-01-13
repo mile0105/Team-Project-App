@@ -1,8 +1,8 @@
 import * as React from "react";
-import {Item} from "../api/models/shop";
-import {Avatar, Card, ListItem} from "react-native-elements";
-import {Image, Modal} from "react-native";
 import {useState} from "react";
+import {Item} from "../api/models/shop";
+import {Avatar, ListItem} from "react-native-elements";
+import {Image, Modal} from "react-native";
 
 export interface ItemComponentProps {
   item: Item

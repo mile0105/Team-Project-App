@@ -6,11 +6,13 @@ import AchievementsScreen from '../screens/AchievementsScreen';
 import ChallengesScreen from '../screens/ChallengesScreen';
 import EventsScreen from '../screens/EventsScreen';
 import {
-  DrawerParamList,
+  AccountStatsParamList,
   AchievementsParamList,
   ChallengesParamList,
+  DrawerParamList,
   EventsParamList,
-  RequirementsParamList, ShopParamList, AccountStatsParamList
+  RequirementsParamList,
+  ShopParamList
 } from '../types';
 import ShopScreen from "../screens/ShopScreen";
 import RequirementsScreen from "../screens/RequirementsScreen";

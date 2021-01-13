@@ -1,9 +1,9 @@
 import * as React from "react";
+import {useState} from "react";
 import {Challenge} from "../api/models/challenges";
 import {ListItem} from "react-native-elements";
 import ChallengeDetailsComponent from "./ChallengeDetailsComponent";
 import {Modal} from "react-native";
-import {useState} from "react";
 
 export interface ChallengeComponentProps {
   challenge: Challenge
